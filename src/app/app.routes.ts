@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { ProjectsPageComponent } from './tasks/pages/projects-page/projects-page.component';
+import { ProjectsPageComponent } from './features/projects/pages/projects-page/projects-page.component';
 
 export const routes: Routes = [
   {

@@ -1,0 +1,33 @@
+
+.container {
+  margin-inline: 50px;
+}
+
+.flex-container{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 35px;
+  /* background-color: yellow; */
+}
+
+.flex-container > div {
+  /* background-color: aqua; */
+  flex: 1;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  gap: 15px;
+  padding: 5px;
+  justify-content: center;
+}
+
+.project-card:hover{
+  cursor: pointer;
+  scale: 1.1;
+}
