@@ -1,20 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { API_ENDPOINTS } from '../../../Core/constants/api-endpoints';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TasksService {
-  private baseUrl = 'http://localhost:4200/api/tasks';
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  updateTask(id: number, task: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, task);
+  updateTask(id: string, task: any): Observable<any> {
+    return this.http.put(API_ENDPOINTS.tasks.update(id), task);
   }
 
-  deleteTask(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`);
+  deleteTask(id: string): Observable<any> {
+    return this.http.delete(API_ENDPOINTS.tasks.delete(id));
   }
 }

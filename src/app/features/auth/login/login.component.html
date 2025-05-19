@@ -1,1 +1,23 @@
-<p>login works!</p>
+<form (ngSubmit)="login()" class="login-form" #loginForm="ngForm" autocomplete="off">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Iniciar sesión</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Usuario</mat-label>
+        <input matInput [(ngModel)]="username" name="username" required autocomplete="username" />
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Contraseña</mat-label>
+        <input matInput [(ngModel)]="password" name="password" type="password" required autocomplete="current-password" />
+      </mat-form-field>
+      <div *ngIf="error" class="error-message">{{ error }}</div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid || loading">
+        {{ loading ? 'Entrando...' : 'Entrar' }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

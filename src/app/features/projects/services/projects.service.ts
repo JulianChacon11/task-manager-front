@@ -1,40 +1,39 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { API_ENDPOINTS } from '../../../Core/constants/api-endpoints';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectsService {
-  private baseUrl = 'http://localhost:4200/api/projects';
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getProjects(): Observable<any> {
-    return this.http.get(`${this.baseUrl}`);
-  }
-
-  getProjectById(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${id}`);
+    return this.http.get(API_ENDPOINTS.projects.list);
   }
 
   createProject(project: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}`, project);
+    return this.http.post(API_ENDPOINTS.projects.create, project);
   }
 
-  updateProject(id: number, project: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, project);
+  getProjectById(id: string): Observable<any> {
+    return this.http.get(API_ENDPOINTS.projects.detail(id));
   }
 
-  deleteProject(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`);
+  updateProject(id: string, project: any): Observable<any> {
+    return this.http.put(API_ENDPOINTS.projects.update(id), project);
   }
 
-  getProjectTasks(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${id}/tasks`);
+  deleteProject(id: string): Observable<any> {
+    return this.http.delete(API_ENDPOINTS.projects.delete(id));
   }
 
-  createProjectTask(id: number, task: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/${id}/tasks`, task);
+  getProjectTasks(id: string): Observable<any> {
+    return this.http.get(API_ENDPOINTS.projects.tasks(id));
+  }
+
+  createProjectTask(id: string, task: any): Observable<any> {
+    return this.http.post(API_ENDPOINTS.projects.create_task(id), task);
   }
 }
