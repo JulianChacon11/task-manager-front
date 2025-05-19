@@ -1,11 +1,12 @@
 <div class="container">
   <div class="flex-container">
     @for (project of projects(); track project.id) {
-      <div class="project-card">
-        <div>
+      <div class="project-card" [routerLink]="[project.id, 'tasks']">
+        <div class="project-card-header">
           <i class="material-icons">library_books</i>
+          <p>{{ project.name }}</p>
         </div>
-        <p>Project name 1</p>
+        <p>{{ project.description }}</p>
       </div>
     }
   </div>

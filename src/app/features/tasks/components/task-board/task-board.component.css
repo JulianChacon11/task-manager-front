@@ -1,3 +1,31 @@
 :host {
   display: block;
 }
+
+.task-board-container{
+  display: grid;
+  width: 100%;
+  gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+
+
+.task-card {
+  padding: 20px 15px 20px 15px;
+  text-align: center;
+  border-radius: 9px;
+  background-color: red;
+}
+
+.board-header {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.board-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

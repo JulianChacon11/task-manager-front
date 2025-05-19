@@ -1,0 +1,11 @@
+:host {
+  display: block;
+}
+
+section {
+  margin-inline: 20px;
+}
+
+hr {
+  margin-bottom: 40px;
+}

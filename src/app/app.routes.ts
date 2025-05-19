@@ -1,9 +1,18 @@
 import { Routes } from '@angular/router';
-import { ProjectsPageComponent } from './features/projects/pages/projects-page/projects-page.component';
+import { LoginComponent } from './features/auth/login/login.component';
 
 export const routes: Routes = [
   {
-    path: '',
-    component: ProjectsPageComponent
+    path: 'projects',
+    loadChildren: () => import('./features/projects/projects.routes'),
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: '**',
+    redirectTo: 'login'
   }
+
 ];

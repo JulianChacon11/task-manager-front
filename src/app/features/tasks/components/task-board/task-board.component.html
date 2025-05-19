@@ -1,1 +1,31 @@
-<p>task-board works!</p>,
+<div class="task-board-container">
+  <div class="board-header">Tasks</div>
+  <div class="board-header">To-do</div>
+  <div class="board-header">In progress</div>
+  <div class="board-header">Done</div>
+  <div
+    cdkDropList
+    #todoList="cdkDropList"
+    [cdkDropListData]="todo"
+    [cdkDropListConnectedTo]="[doneList]"
+    (cdkDropListDropped)="drop($event)"
+    class="board-column"
+  >
+    @for (item of todo; track item) {
+      <div class="task-card" cdkDrag>{{item}}</div>
+    }
+  </div>
+
+  <div
+    cdkDropList
+    #doneList="cdkDropList"
+    [cdkDropListData]="done"
+    [cdkDropListConnectedTo]="[todoList]"
+    class="board-column"
+    (cdkDropListDropped)="drop($event)"
+  >
+     @for (item of done; track item) {
+      <div class="task-card" cdkDrag>{{item}}</div>
+    }
+  </div>
+</div>

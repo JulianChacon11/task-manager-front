@@ -1,26 +1,11 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
-const projects = [
-  {
-    id: 1,
-    name: 'Project 1',
-    description: 'asdsad'
-  },
-  {
-    id: 2,
-    name: 'Project 2',
-    description: 'asdsad'
-  },
-  {
-    id: 3,
-    name: 'Project 3',
-    description: 'asdsad'
-  }
-];
+
 
 @Component({
   selector: 'project-list',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './project-list.component.html',
   styleUrl: './project-list.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -28,6 +13,6 @@ const projects = [
 
 export class ProjectListComponent {
 
-  projects = signal(projects);
+  projects = input.required<any>();
 
 }
