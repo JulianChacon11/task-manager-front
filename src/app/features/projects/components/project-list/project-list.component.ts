@@ -32,6 +32,9 @@ export class ProjectListComponent {
       }
     });
   }
+    openNewProjectDialog() {
+    this.dialog.open(ProjectFormDialogComponent, {data: {}});
+  }
 
   onEdit(project: Project) {
     this.dialog.open(ProjectFormDialogComponent, {
