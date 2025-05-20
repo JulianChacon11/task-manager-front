@@ -30,6 +30,7 @@ import { MatTimepickerModule } from '@angular/material/timepicker';
 import { Project } from '../../../projects/interfaces/project.interface';
 import { Task } from '../../interfaces/task.interface';
 import { MatIconModule } from '@angular/material/icon';
+import { FormUtils } from '../../../../utils/form.utils';
 
 enum TaskStatus {
   TODO = 'to-do',
@@ -62,6 +63,7 @@ export class TaskFormComponent implements OnInit {
   readonly dialogRef = inject(MatDialogRef<TaskFormComponent>);
   private formBuilder = inject(FormBuilder);
   data: { task: Task; mode: string } = inject(MAT_DIALOG_DATA);
+  formUtils = FormUtils;
 
   tasksStatusEnum = TaskStatus;
   modalTitle = signal<string>('');

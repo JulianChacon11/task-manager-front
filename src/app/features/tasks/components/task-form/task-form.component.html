@@ -1,8 +1,7 @@
 <div class="modal-header">
-
   <h2 mat-dialog-title>{{ modalTitle() }} task</h2>
   @if ( this.data.mode !== 'add') {
-    <mat-icon (click)="onTaskEdit()">edit</mat-icon>
+  <mat-icon (click)="onTaskEdit()">edit</mat-icon>
   }
 </div>
 <mat-dialog-content>
@@ -11,16 +10,31 @@
       <mat-form-field appearance="outline" class="name-field">
         <mat-label>Name</mat-label>
         <input matInput formControlName="nombreTarea" />
+        @if ( formUtils.isValidField( taskForm, "nombreTarea")) {
+        <mat-error>{{
+          formUtils.getFieldError(taskForm, "nombreTarea")
+        }}</mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="time-field">
         <mat-label>Duration</mat-label>
         <input type="number" matInput formControlName="duracion" />
+        @if ( formUtils.isValidField( taskForm, "duracion")) {
+        <mat-error>{{
+          formUtils.getFieldError(taskForm, "duracion")
+        }}</mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="description-field">
         <mat-label>Description</mat-label>
         <textarea matInput formControlName="descripcion"></textarea>
+        @if ( formUtils.isValidField( taskForm, "descripcion")) {
+        <mat-error>{{
+          formUtils.getFieldError(taskForm, "descripcion")
+        }}</mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="status-field">
@@ -36,9 +50,18 @@
 
       <mat-form-field appearance="outline" clas="end-date-field">
         <mat-label>End date</mat-label>
-        <input matInput [matDatepicker]="datepicker" formControlName="fechaFin" />
+        <input
+          matInput
+          [matDatepicker]="datepicker"
+          formControlName="fechaFin"
+        />
         <mat-datepicker #datepicker />
         <mat-datepicker-toggle [for]="datepicker" matSuffix />
+        @if ( formUtils.isValidField( taskForm, "fechaFin")) {
+        <mat-error>{{
+          formUtils.getFieldError(taskForm, "fechaFin")
+        }}</mat-error>
+        }
       </mat-form-field>
     </form>
   </div>
@@ -46,14 +69,14 @@
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
   @if ( this.data.mode !== 'view' || this.isEditing() ) {
-    <button
-      mat-button
-      mat-dialog-close
-      cdkFocusInitial
-      (click)="onFormSubmit()"
-      class="btn-add"
-    >
-      Save
-    </button>
+  <button
+    mat-button
+    mat-dialog-close
+    cdkFocusInitial
+    (click)="onFormSubmit()"
+    class="btn-add"
+  >
+    Save
+  </button>
   }
 </mat-dialog-actions>
