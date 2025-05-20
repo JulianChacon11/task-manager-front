@@ -1,7 +1,16 @@
 <div class="container">
+      <button mat-raised-button color="primary" (click)="openNewProjectDialog()">
+      New
+    </button>
   <div class="flex-container">
     @for (project of projects(); track project.id) {
       <div class="project-card" [routerLink]="[project.id, 'tasks']">
+        <div style="display: flex; justify-content: flex-start; align-items: center;">
+          <app-menu-project-list
+            (editProject)="onEdit(project)"
+            (deleteProject)="onDelete(project.id)">
+          </app-menu-project-list>
+        </div>
         <div class="project-card-header">
           <i class="material-icons">library_books</i>
           <p>{{ project.nombre }}</p>

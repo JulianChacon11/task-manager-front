@@ -7,7 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, provideNativeDateAdapter } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -17,7 +17,8 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: ['./project-form-dialog.component.css'],
   imports: [MatDialogModule, MatFormFieldModule, MatInputModule, 
     MatButtonModule, MatIconModule, MatDatepickerModule, 
-    MatNativeDateModule,ReactiveFormsModule ]
+    MatNativeDateModule,ReactiveFormsModule ],
+    providers: [provideNativeDateAdapter()],
 })
 export class ProjectFormDialogComponent {
   form: FormGroup;
