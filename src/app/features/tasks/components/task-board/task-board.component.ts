@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  effect, // Import effect
   input,
   signal,
 } from '@angular/core';
@@ -11,6 +12,7 @@ import {
   CdkDrag,
   CdkDropList,
 } from '@angular/cdk/drag-drop';
+import { Task } from '../../interfaces/task.interface';
 
 @Component({
   selector: 'tasks-task-board',
@@ -20,13 +22,22 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskBoardComponent {
-  // tasks = input.required<any>();
+  tasks = input.required<Task[]>();
+  todo = signal<Task[]>([]);
+  inProgress = signal<Task[]>([]);
+  done = signal<Task[]>([]);
 
-  todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
+  tasksEffect = effect(() => {
+    const currentTasks = this.tasks();
+    this.todo.set(currentTasks.filter((task) => task.estado === 'to-do'));
+    this.inProgress.set(currentTasks.filter((task) => task.estado === 'in-progress'));
+    this.done.set(currentTasks.filter((task) => task.estado === 'done'));
+  });
 
-  done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<Task[]>) {
+    const task = event.item.data as Task;
+
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -40,6 +51,23 @@ export class TaskBoardComponent {
         event.previousIndex,
         event.currentIndex
       );
+
+      const newContainerId = (event.container.element.nativeElement as HTMLElement).id;
+      let newEstado = '';
+
+      if (newContainerId === 'todoList') {
+        newEstado = 'to-do';
+      } else if (newContainerId === 'inProgressList') {
+        newEstado = 'in-progress';
+      } else if (newContainerId === 'doneList') {
+        newEstado = 'done';
+      }
+
+      if (newEstado && task.estado !== newEstado) {
+        task.estado = newEstado;
+        console.log(`Task '${task.nombreTarea}' status updated to: ${task.estado}`);
+      }
     }
   }
+
 }

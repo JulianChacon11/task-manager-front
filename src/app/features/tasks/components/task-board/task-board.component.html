@@ -1,31 +1,49 @@
 <div class="task-board-container">
-  <div class="board-header">Tasks</div>
   <div class="board-header">To-do</div>
   <div class="board-header">In progress</div>
   <div class="board-header">Done</div>
   <div
     cdkDropList
     #todoList="cdkDropList"
-    [cdkDropListData]="todo"
-    [cdkDropListConnectedTo]="[doneList]"
+    id="todoList"
+    [cdkDropListData]="todo()"
+    [cdkDropListConnectedTo]="[doneList, inProgressList]"
     (cdkDropListDropped)="drop($event)"
     class="board-column"
+    aria-label="To-do tasks"
   >
-    @for (item of todo; track item) {
-      <div class="task-card" cdkDrag>{{item}}</div>
+    @for (item of todo(); track item) {
+    <div class="task-card" cdkDrag [cdkDragData]="item">{{ item.nombreTarea }}</div>
+    }
+  </div>
+
+  <div
+    cdkDropList
+    #inProgressList="cdkDropList"
+    id="inProgressList"
+    [cdkDropListData]="inProgress()"
+    [cdkDropListConnectedTo]="[todoList, doneList]"
+    class="board-column"
+    (cdkDropListDropped)="drop($event)"
+    aria-label="In progress tasks"
+  >
+    @for (item of inProgress(); track item) {
+    <div class="task-card" cdkDrag [cdkDragData]="item">{{ item.nombreTarea }}</div>
     }
   </div>
 
   <div
     cdkDropList
     #doneList="cdkDropList"
-    [cdkDropListData]="done"
-    [cdkDropListConnectedTo]="[todoList]"
+    id="doneList"
+    [cdkDropListData]="done()"
+    [cdkDropListConnectedTo]="[todoList, inProgressList]"
     class="board-column"
     (cdkDropListDropped)="drop($event)"
+    aria-label="Done tasks"
   >
-     @for (item of done; track item) {
-      <div class="task-card" cdkDrag>{{item}}</div>
+    @for (item of done(); track item) {
+    <div class="task-card" cdkDrag [cdkDragData]="item">{{ item.nombreTarea }}</div>
     }
   </div>
 </div>

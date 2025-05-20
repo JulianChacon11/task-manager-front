@@ -1,22 +1,29 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { ProjectListComponent } from '../../components/project-list/project-list.component';
 import { RouterOutlet } from '@angular/router';
+import { Project } from '../../interfaces/project.interface';
 
-const projects = [
+const projects: Project[] = [
   {
     id: 1,
-    name: 'Project 1',
-    description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore, laudantium incidunt vitae facere natus sunt ratione neque voluptatem fugiat cumqu'
+    nombre: 'Project 1',
+    descripcion: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore, laudantium incidunt vitae facere natus sunt ratione neque voluptatem fugiat cumqu',
+    fechaInicio: new Date('2025-05-20'),
+    fechaFin: new Date('2025-05-22')
   },
   {
     id: 2,
-    name: 'Project 2',
-    description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore, laudantium incidunt vitae facere natus sunt ratione neque voluptatem fugiat cumqu'
+    nombre: 'Project 2',
+    descripcion: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore, laudantium incidunt vitae facere natus sunt ratione neque voluptatem fugiat cumqu',
+    fechaInicio: new Date('2025-05-20'),
+    fechaFin: new Date('2025-05-22')
   },
   {
     id: 3,
-    name: 'Project 3',
-    description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore, laudantium incidunt vitae facere natus sunt ratione neque voluptatem fugiat cumqu'
+    nombre: 'Project 3',
+    descripcion: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore, laudantium incidunt vitae facere natus sunt ratione neque voluptatem fugiat cumqu',
+    fechaInicio: new Date('2025-05-20'),
+    fechaFin: new Date('2025-05-22')
   }
 ];
 

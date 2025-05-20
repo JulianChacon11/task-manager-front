@@ -4,9 +4,19 @@
       <div class="project-card" [routerLink]="[project.id, 'tasks']">
         <div class="project-card-header">
           <i class="material-icons">library_books</i>
-          <p>{{ project.name }}</p>
+          <p>{{ project.nombre }}</p>
         </div>
-        <p>{{ project.description }}</p>
+        <p>{{ project.descripcion }}</p>
+        <div class="project-dates">
+          <div>
+            <span>Start date</span>
+            <p>{{ project.fechaInicio | date }}</p>
+          </div>
+          <div>
+            <span>End date</span>
+            <p>{{ project.fechaFin | date }}</p>
+          </div>
+        </div>
       </div>
     }
   </div>

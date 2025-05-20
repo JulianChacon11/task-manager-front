@@ -1,5 +1,5 @@
 p{
-  margin: 0;
+  margin: 0px;
 }
 
 .container {
@@ -46,6 +46,17 @@ p{
 .project-card:hover{
   cursor: pointer;
   scale: 1.1;
+}
+
+.project-dates {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.project-dates span {
+  margin-left: 8px;
+  font-weight: 600;
 }
 
 
