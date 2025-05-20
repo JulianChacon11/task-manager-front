@@ -9,3 +9,8 @@ section {
 hr {
   margin-bottom: 40px;
 }
+.projects-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
