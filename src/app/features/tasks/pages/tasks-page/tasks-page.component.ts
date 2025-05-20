@@ -1,14 +1,19 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TaskBoardComponent } from '../../components/task-board/task-board.component';
 import { Task } from '../../interfaces/task.interface';
+import { MatIconModule } from '@angular/material/icon';
+import { TaskFormComponent } from '../../components/task-form/task-form.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  imports: [TaskBoardComponent],
+  imports: [TaskBoardComponent, MatIconModule],
   templateUrl: './tasks-page.component.html',
   styleUrl: './tasks-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class TasksPageComponent {
+
+  readonly dialog = inject(MatDialog);
 
    tasks: Task[] = [
     {
@@ -118,4 +123,15 @@ export default class TasksPageComponent {
       estado: 'in-progress',
     }
   ];
+
+   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(TaskFormComponent, {
+      width: 'fit-content',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      data: {
+        mode: 'add'
+      }
+    });
+  }
 }

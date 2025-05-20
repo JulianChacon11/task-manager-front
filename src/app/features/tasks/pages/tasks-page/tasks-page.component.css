@@ -1,3 +1,31 @@
 :host {
   display: block;
 }
+
+.add-button-container {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 16px;
+  margin-right: 16px;
+}
+
+button{
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+  background-color: forestgreen;
+  color: white;
+  font-size: 16px;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  z-index: 9999;
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+button:hover{
+  cursor: pointer;
+  opacity: 0.8;
+  border-color: black;
+  transform: scale(1.05);
+}

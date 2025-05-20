@@ -45,7 +45,8 @@ p{
 
 .project-card:hover{
   cursor: pointer;
-  scale: 1.1;
+  transform: scale(1.05);
+  transition: transform 0.2s ease-in-out;
 }
 
 .project-dates {

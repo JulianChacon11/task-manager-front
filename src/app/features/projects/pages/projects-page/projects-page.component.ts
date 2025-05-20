@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { ProjectListComponent } from '../../components/project-list/project-list.component';
-import { RouterOutlet } from '@angular/router';
 import { Project } from '../../interfaces/project.interface';
 
 const projects: Project[] = [

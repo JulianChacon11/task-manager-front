@@ -1,7 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  effect, // Import effect
+  effect, inject, // Import effect
   input,
   signal,
 } from '@angular/core';
@@ -13,6 +13,9 @@ import {
   CdkDropList,
 } from '@angular/cdk/drag-drop';
 import { Task } from '../../interfaces/task.interface';
+import { MatDialog } from '@angular/material/dialog';
+import { TaskFormComponent } from '../task-form/task-form.component';
+
 
 @Component({
   selector: 'tasks-task-board',
@@ -22,10 +25,13 @@ import { Task } from '../../interfaces/task.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskBoardComponent {
+
+  readonly dialog = inject(MatDialog);
   tasks = input.required<Task[]>();
   todo = signal<Task[]>([]);
   inProgress = signal<Task[]>([]);
   done = signal<Task[]>([]);
+
 
   tasksEffect = effect(() => {
     const currentTasks = this.tasks();
@@ -70,4 +76,15 @@ export class TaskBoardComponent {
     }
   }
 
+  openTaskDialog(enterAnimationDuration: string, exitAnimationDuration: string, task?: Task): void {
+      this.dialog.open(TaskFormComponent, {
+        width: 'fit-content',
+        enterAnimationDuration,
+        exitAnimationDuration,
+        data: {
+          task,
+          mode: 'view',
+        }
+      });
+    }
 }

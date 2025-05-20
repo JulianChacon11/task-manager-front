@@ -13,7 +13,14 @@
     aria-label="To-do tasks"
   >
     @for (item of todo(); track item) {
-    <div class="task-card" cdkDrag [cdkDragData]="item">{{ item.nombreTarea }}</div>
+    <div
+      class="task-card"
+      cdkDrag
+      [cdkDragData]="item"
+      (click)="openTaskDialog('500ms', '500ms', item)"
+    >
+      {{ item.nombreTarea }}
+    </div>
     }
   </div>
 
@@ -28,7 +35,14 @@
     aria-label="In progress tasks"
   >
     @for (item of inProgress(); track item) {
-    <div class="task-card" cdkDrag [cdkDragData]="item">{{ item.nombreTarea }}</div>
+    <div
+      class="task-card"
+      cdkDrag
+      [cdkDragData]="item"
+      (click)="openTaskDialog('500ms', '500ms', item)"
+    >
+      {{ item.nombreTarea }}
+    </div>
     }
   </div>
 
@@ -43,7 +57,14 @@
     aria-label="Done tasks"
   >
     @for (item of done(); track item) {
-    <div class="task-card" cdkDrag [cdkDragData]="item">{{ item.nombreTarea }}</div>
+    <div
+      class="task-card"
+      cdkDrag
+      [cdkDragData]="item"
+      (click)="openTaskDialog('500ms', '500ms', item)"
+    >
+      {{ item.nombreTarea }}
+    </div>
     }
   </div>
 </div>

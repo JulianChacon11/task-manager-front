@@ -1,3 +1,9 @@
 <section>
+  <div class="add-button-container">
+    <button (click)="openDialog('500ms', '500ms')">
+      <mat-icon>add</mat-icon>
+      <span>Add task</span>
+    </button>
+  </div>
   <tasks-task-board [tasks]="tasks"></tasks-task-board>
 </section>

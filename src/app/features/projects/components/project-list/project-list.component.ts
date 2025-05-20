@@ -16,5 +16,4 @@ import { DatePipe } from '@angular/common';
 export class ProjectListComponent {
 
   projects = input.required<Project[]>();
-
 }
