@@ -1,6 +1,6 @@
 
 export interface Project {
-  id: number,
+  id: string,
   nombre: string,
   fechaInicio: Date,
   fechaFin: Date,
