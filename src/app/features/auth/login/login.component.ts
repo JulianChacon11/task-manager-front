@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @Component({
@@ -17,7 +18,8 @@ import { CommonModule } from '@angular/common';
     MatInputModule,
     MatButtonModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    MatIconModule
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
