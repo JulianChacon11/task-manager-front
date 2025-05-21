@@ -17,13 +17,12 @@ import { rxResource } from '@angular/core/rxjs-interop';
 export default class TasksPageComponent {
   readonly dialog = inject(MatDialog);
   taskService = inject(TasksService);
-  taskId = inject(ActivatedRoute).snapshot.params['id'];
+  projectId = inject(ActivatedRoute).snapshot.params['id'];
 
   taskResource = rxResource({
-    loader: () => {
-      const result$ = this.taskService.getAllTasks();
-      result$.subscribe((data) => console.log('Desde loader:', data));
-      return result$;
+    request: () => ({projectId: this.projectId}),
+    loader: ({ request }) => {
+      return this.taskService.getProjectTasks(request.projectId);
     },
   });
 
@@ -31,13 +30,20 @@ export default class TasksPageComponent {
     enterAnimationDuration: string,
     exitAnimationDuration: string
   ): void {
-    this.dialog.open(TaskFormComponent, {
+    const dialogRef = this.dialog.open(TaskFormComponent, {
       width: 'fit-content',
       enterAnimationDuration,
       exitAnimationDuration,
       data: {
         mode: 'add',
+        projectId: this.projectId,
       },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.taskResource.reload();
+      }
     });
   }
 }

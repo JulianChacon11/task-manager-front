@@ -1,7 +1,11 @@
 <div class="modal-header">
   <h2 mat-dialog-title>{{ modalTitle() }} task</h2>
   @if ( this.data.mode !== 'add') {
-  <mat-icon (click)="onTaskEdit()">edit</mat-icon>
+  <div style="display: flex; gap: 10px">
+    <mat-icon (click)="onTaskEdit()">edit</mat-icon>
+    <mat-icon (click)="onDeleteTask()">delete</mat-icon>
+  </div>
+
   }
 </div>
 <mat-dialog-content>
@@ -9,21 +13,17 @@
     <form [formGroup]="taskForm" class="form-container">
       <mat-form-field appearance="outline" class="name-field">
         <mat-label>Name</mat-label>
-        <input matInput formControlName="nombreTarea" />
-        @if ( formUtils.isValidField( taskForm, "nombreTarea")) {
-        <mat-error>{{
-          formUtils.getFieldError(taskForm, "nombreTarea")
-        }}</mat-error>
+        <input matInput formControlName="nombre" />
+        @if ( formUtils.isValidField( taskForm, "nombre")) {
+        <mat-error>{{ formUtils.getFieldError(taskForm, "nombre") }}</mat-error>
         }
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="time-field">
         <mat-label>Duration</mat-label>
-        <input type="number" matInput formControlName="duracion" />
-        @if ( formUtils.isValidField( taskForm, "duracion")) {
-        <mat-error>{{
-          formUtils.getFieldError(taskForm, "duracion")
-        }}</mat-error>
+        <input type="number" matInput formControlName="tiempo" />
+        @if ( formUtils.isValidField( taskForm, "tiempo")) {
+        <mat-error>{{ formUtils.getFieldError(taskForm, "tiempo") }}</mat-error>
         }
       </mat-form-field>
 
@@ -40,9 +40,9 @@
       <mat-form-field appearance="outline" class="status-field">
         <mat-label>Status</mat-label>
         <mat-select formControlName="estado">
-          @for (status of statusOptions; track $index) {
-          <mat-option [value]="status">
-            {{ status }}
+          @for (status of taskStatusOptions; track $index) {
+          <mat-option [value]="status.value">
+            {{ status.label }}
           </mat-option>
           }
         </mat-select>

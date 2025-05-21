@@ -9,6 +9,7 @@ p{
 .flex-container{
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   width: 100%;
   gap: 35px;
   /* background-color: yellow; */

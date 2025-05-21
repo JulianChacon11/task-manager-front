@@ -1,3 +1,4 @@
+@if ( tasks().length > 0 ) {
 <div class="task-board-container">
   <div class="board-header">To-do</div>
   <div class="board-header">In progress</div>
@@ -68,3 +69,9 @@
     }
   </div>
 </div>
+}@else {
+  <div class="no-tasks">
+    <mat-icon>info</mat-icon>
+    <span>No tasks available</span>
+  </div>
+}

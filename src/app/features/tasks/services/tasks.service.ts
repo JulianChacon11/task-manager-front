@@ -10,12 +10,18 @@ import { Task } from '../interfaces/task.interface';
 export class TasksService {
   private http = inject(HttpClient);
 
-  updateTask(id: string, task: any): Observable<any> {
-    return this.http.put(API_ENDPOINTS.tasks.update(id), task);
-  }
 
   deleteTask(id: string): Observable<any> {
     return this.http.delete(API_ENDPOINTS.tasks.delete(id));
+  }
+
+  createTask( task: Task) {
+    return this.http.post<Task>(API_ENDPOINTS.tasks.create, task).pipe(
+      catchError((error) => {
+        console.error('Error creating task:', error);
+        return of(null);
+      })
+    );
   }
 
   getAllTasks(): Observable<Task[]> {
@@ -23,6 +29,24 @@ export class TasksService {
       catchError((error) => {
         console.error('Error fetching tasks:', error);
         return of([]);
+      })
+    );
+  }
+
+  getProjectTasks(id: string): Observable<Task[]> {
+    return this.http.get<Task[]>(API_ENDPOINTS.projects.tasks(id)).pipe(
+      catchError((error) => {
+        console.error('Error fetching project tasks:', error);
+        return of([]);
+      })
+    );
+  }
+
+  updateTask( task: Task ) {
+    return this.http.put<Task>(API_ENDPOINTS.tasks.update(), task).pipe(
+      catchError((error) => {
+        console.error('Error updating task:', error);
+        return of(null);
       })
     );
   }

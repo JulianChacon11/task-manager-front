@@ -6,6 +6,6 @@ export interface Task {
   idProyecto: string,
   idUsuario: string,
   nombre: string,
-  time: number,
+  tiempo: number,
   estado: number,
 }

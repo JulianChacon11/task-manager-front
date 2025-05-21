@@ -20,12 +20,13 @@ export const API_ENDPOINTS = {
     detail: (id: string) => `${API_BASE_URL}/project/${id}`,
     update: `${API_BASE_URL}/project/async`,
     delete: (id: string) => `${API_BASE_URL}/project/async/${id}`,
-    tasks: (id: string) => `${API_BASE_URL}/projects/${id}/tasks`,
+    tasks: (id: string) => `${API_BASE_URL}/task/byProjectId/${id}`,
     create_task: (id: string) => `${API_BASE_URL}/projects/${id}/tasks`
   },
   tasks: {
-    update: (id: string) => `${API_BASE_URL}/tasks/${id}`,
-    delete: (id: string) => `${API_BASE_URL}/tasks/${id}`,
+    update: () => `${API_BASE_URL}/task/async`,
+    delete: (id: string) => `${API_BASE_URL}/task/async/${id}`,
+    create: `${API_BASE_URL}/task/async`,
     getAll: `${API_BASE_URL}/task/all/async`,
   }
 };
