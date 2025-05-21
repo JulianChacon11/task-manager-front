@@ -11,21 +11,19 @@ import { of } from 'rxjs';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-
-
-
-login(username: string, password: string): Observable<any> {
+/*login(username: string, password: string): Observable<any> {
   // Simulación de login exitoso
   const fakeToken = 'fake-jwt-token';
   localStorage.setItem('token', fakeToken);
   return of({ token: fakeToken });
-}
-/*login(username: string, password: string): Observable<any> {
-  const credentials = { username, password };
-  return this.http.post<{ token: string }>(API_ENDPOINTS.auth.login, credentials).pipe(
-    tap(response => localStorage.setItem('token', response.token))
-  );
 }*/
+  login(correo: string, password: string): Observable<any> {
+    const credentials = { correo, password };
+    console.log(credentials);
+    return this.http.post<{ token: string }>(API_ENDPOINTS.auth.login, credentials).pipe(
+      tap(response => localStorage.setItem('token', response.token))
+    );
+  }
 
   getToken(): string | null {
     return localStorage.getItem('token');

@@ -1,7 +1,10 @@
 <div class="container">
-      <button mat-raised-button color="primary" (click)="openNewProjectDialog()">
-      New
+      <div class="add-button-container">
+    <button (click)="openNewProjectDialog()">
+      <mat-icon>add</mat-icon>
+      <span>Add project</span>
     </button>
+  </div>
   <div class="flex-container">
     @for (project of projects(); track project.id) {
       <div class="project-card" [routerLink]="[project.id, 'tasks']">
