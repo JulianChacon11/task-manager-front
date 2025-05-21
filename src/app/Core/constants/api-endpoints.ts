@@ -15,11 +15,11 @@ export const API_ENDPOINTS = {
     stats: `${API_BASE_URL}/dashboard/stats`
   },
   projects: {
-    list: `${API_BASE_URL}/projects`,
-    create: `${API_BASE_URL}/projects`,
-    detail: (id: string) => `${API_BASE_URL}/projects/${id}`,
-    update: (id: string) => `${API_BASE_URL}/projects/${id}`,
-    delete: (id: string) => `${API_BASE_URL}/projects/${id}`,
+    list: `${API_BASE_URL}/project/all/async`,
+    create: `${API_BASE_URL}/project/async`,
+    detail: (id: string) => `${API_BASE_URL}/project/${id}`,
+    update: `${API_BASE_URL}/project/async`,
+    delete: (id: string) => `${API_BASE_URL}/project/async/${id}`,
     tasks: (id: string) => `${API_BASE_URL}/projects/${id}/tasks`,
     create_task: (id: string) => `${API_BASE_URL}/projects/${id}/tasks`
   },

@@ -1,30 +1,9 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, OnInit } from '@angular/core';
 import { ProjectListComponent } from '../../components/project-list/project-list.component';
 import { Project } from '../../interfaces/project.interface';
-
-const projects: Project[] = [
-  {
-    id: "1",
-    nombre: 'Project 1',
-    descripcion: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore, laudantium incidunt vitae facere natus sunt ratione neque voluptatem fugiat cumqu',
-    fechaInicio: new Date('2025-05-20'),
-    fechaFin: new Date('2025-05-22')
-  },
-  {
-    id: "2",
-    nombre: 'Project 2',
-    descripcion: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore, laudantium incidunt vitae facere natus sunt ratione neque voluptatem fugiat cumqu',
-    fechaInicio: new Date('2025-05-20'),
-    fechaFin: new Date('2025-05-22')
-  },
-  {
-    id:"3" ,
-    nombre: 'Project 3',
-    descripcion: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore, laudantium incidunt vitae facere natus sunt ratione neque voluptatem fugiat cumqu',
-    fechaInicio: new Date('2025-05-20'),
-    fechaFin: new Date('2025-05-22')
-  }
-];
+import { ProjectsService } from '../../services/projects.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ProjectFormDialogComponent } from '../../project-form-dialog/project-form-dialog.component';
 
 @Component({
   imports: [ProjectListComponent],
@@ -32,7 +11,41 @@ const projects: Project[] = [
   styleUrl: './projects-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ProjectsPageComponent {
+export default class ProjectsPageComponent implements OnInit {
 
-  projects = signal(projects);
+  projects = signal<Project[]>([]);
+
+  constructor(private projectsService: ProjectsService, private dialog: MatDialog) {}
+
+  ngOnInit(): void {
+    console.log('ProjectsPageComponent initialized');
+    this.loadProjects();
+  }
+
+  loadProjects() {
+    this.projectsService.getProjects().subscribe({
+      next: (projects) => this.projects.set(projects),
+      error: (err) => console.error('Error fetching projects:', err)
+    });
+  }
+
+  openNewProjectDialog() {
+    const dialogRef = this.dialog.open(ProjectFormDialogComponent, { data: {} });
+    console.log('Dialog opened');
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog closed', result);
+      if (result) {
+        this.loadProjects(); // Refresca la lista si se creó un proyecto
+      }
+    });
+  }
+
+  openEditProjectDialog(project: Project) {
+    const dialogRef = this.dialog.open(ProjectFormDialogComponent, { data: { project } });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadProjects(); // Refresca la lista si se editó un proyecto
+      }
+    });
+  }
 }

@@ -6,10 +6,10 @@ import { MenuProjectListComponent } from "../../menu-project-list/menu-project-l
 import { MatDialog } from '@angular/material/dialog';
 import { ProjectFormDialogComponent } from '../../project-form-dialog/project-form-dialog.component';
 import { ProjectsService } from '../../services/projects.service';
-
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'project-list',
-  imports: [RouterLink, DatePipe, MenuProjectListComponent],
+  imports: [RouterLink, DatePipe, MenuProjectListComponent,MatIconModule],
   templateUrl: './project-list.component.html',
   styleUrl: './project-list.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

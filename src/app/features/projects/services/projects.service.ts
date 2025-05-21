@@ -22,7 +22,7 @@ export class ProjectsService {
   }
 
   updateProject(id: string, project: any): Observable<any> {
-    return this.http.put(API_ENDPOINTS.projects.update(id), project);
+    return this.http.put(API_ENDPOINTS.projects.update, project);
   }
 
   deleteProject(id: string): Observable<any> {
