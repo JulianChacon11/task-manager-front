@@ -5,7 +5,7 @@ export interface Task {
   id: string,
   idProyecto: string,
   idUsuario: string,
-  nombreTarea: string,
+  nombre: string,
   time: number,
-  estado: string,
+  estado: number,
 }

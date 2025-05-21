@@ -35,9 +35,9 @@ export class TaskBoardComponent {
 
   tasksEffect = effect(() => {
     const currentTasks = this.tasks();
-    this.todo.set(currentTasks.filter((task) => task.estado === 'to-do'));
-    this.inProgress.set(currentTasks.filter((task) => task.estado === 'in-progress'));
-    this.done.set(currentTasks.filter((task) => task.estado === 'done'));
+    this.todo.set(currentTasks.filter((task) => task.estado === 0));
+    this.inProgress.set(currentTasks.filter((task) => task.estado === 1));
+    this.done.set(currentTasks.filter((task) => task.estado === 2 ));
   });
 
 
@@ -59,19 +59,19 @@ export class TaskBoardComponent {
       );
 
       const newContainerId = (event.container.element.nativeElement as HTMLElement).id;
-      let newEstado = '';
+      let newEstado = 0;
 
       if (newContainerId === 'todoList') {
-        newEstado = 'to-do';
+        newEstado = 0;
       } else if (newContainerId === 'inProgressList') {
-        newEstado = 'in-progress';
+        newEstado = 1;
       } else if (newContainerId === 'doneList') {
-        newEstado = 'done';
+        newEstado = 2;
       }
 
       if (newEstado && task.estado !== newEstado) {
         task.estado = newEstado;
-        console.log(`Task '${task.nombreTarea}' status updated to: ${task.estado}`);
+        console.log(`Task '${task.nombre}' status updated to: ${task.estado}`);
       }
     }
   }

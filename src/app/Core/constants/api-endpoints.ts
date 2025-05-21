@@ -25,6 +25,7 @@ export const API_ENDPOINTS = {
   },
   tasks: {
     update: (id: string) => `${API_BASE_URL}/tasks/${id}`,
-    delete: (id: string) => `${API_BASE_URL}/tasks/${id}`
+    delete: (id: string) => `${API_BASE_URL}/tasks/${id}`,
+    getAll: `${API_BASE_URL}/task/all/async`,
   }
 };

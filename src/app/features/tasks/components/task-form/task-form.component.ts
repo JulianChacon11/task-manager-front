@@ -90,7 +90,7 @@ export class TaskFormComponent implements OnInit {
   formInit() {
     if (this.data.task && this.data.mode === 'view' ) {
       this.taskForm.patchValue({
-        nombreTarea: this.data.task.nombreTarea,
+        nombreTarea: this.data.task.nombre,
         descripcion: this.data.task.descripcion,
         duracion: this.data.task.time,
         estado: this.data.task.estado,
