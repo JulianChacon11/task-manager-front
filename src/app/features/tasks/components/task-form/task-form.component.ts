@@ -157,7 +157,7 @@ export class TaskFormComponent implements OnInit {
         fechaFin: this.taskForm.value.fechaFin.toISOString(),
         fechaInicio: new Date().toISOString(),
         idProyecto: this.data.projectId,
-        idUsuario: '073208B6-4D83-4211-AD52-57F2CE5ACAC0',
+        idUsuario: localStorage.getItem('userId'),
       };
       this.TasksService.createTask(newTask).subscribe((response) => {
         this.dialogRef.close(true);

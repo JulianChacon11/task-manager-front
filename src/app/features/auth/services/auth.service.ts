@@ -19,9 +19,11 @@ export class AuthService {
 }*/
   login(correo: string, password: string): Observable<any> {
     const credentials = { correo, password };
-    console.log(credentials);
-    return this.http.post<{ token: string }>(API_ENDPOINTS.auth.login, credentials).pipe(
-      tap(response => localStorage.setItem('token', response.token))
+    return this.http.post<{ token: string, id: string }>(API_ENDPOINTS.auth.login, credentials).pipe(
+      tap(response => {
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('userId', response.id);
+      })
     );
   }
 
@@ -30,7 +32,8 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
+    localStorage.removeItem('token');    
+    localStorage.removeItem('userId');
   }
 
   isAuthenticated(): boolean {
