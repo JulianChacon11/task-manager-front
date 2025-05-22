@@ -1,4 +1,6 @@
 
 <main>
-  <project-list [projects]="projects()"></project-list>
+  @if ( projectsResource.hasValue()) {
+    <project-list [projects]="projectsResource.value()"></project-list>
+  }
 </main>

@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, signal, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, OnInit, inject } from '@angular/core';
 import { ProjectListComponent } from '../../components/project-list/project-list.component';
 import { Project } from '../../interfaces/project.interface';
 import { ProjectsService } from '../../services/projects.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ProjectFormDialogComponent } from '../../project-form-dialog/project-form-dialog.component';
+import { rxResource } from '@angular/core/rxjs-interop';
 
 @Component({
   imports: [ProjectListComponent],
@@ -11,23 +12,28 @@ import { ProjectFormDialogComponent } from '../../project-form-dialog/project-fo
   styleUrl: './projects-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ProjectsPageComponent implements OnInit {
+export default class ProjectsPageComponent {
 
-  projects = signal<Project[]>([]);
+  // projects = signal<Project[]>([]);
+  projectService = inject(ProjectsService);
+  private dialog = inject(MatDialog);
 
-  constructor(private projectsService: ProjectsService, private dialog: MatDialog) {}
+  projectsResource = rxResource({
+    request: () => ({}),
+    loader: () => this.projectService.getProjects(),
+  })
 
-  ngOnInit(): void {
-    console.log('ProjectsPageComponent initialized');
-    this.loadProjects();
-  }
+  // ngOnInit(): void {
+  //   console.log('ProjectsPageComponent initialized');
+  //   this.loadProjects();
+  // }
 
-  loadProjects() {
-    this.projectsService.getProjects().subscribe({
-      next: (projects) => this.projects.set(projects),
-      error: (err) => console.error('Error fetching projects:', err)
-    });
-  }
+  // loadProjects() {
+  //   this.projectsService.getProjects().subscribe({
+  //     next: (projects) => this.projects.set(projects),
+  //     error: (err) => console.error('Error fetching projects:', err)
+  //   });
+  // }
 
   openNewProjectDialog() {
     const dialogRef = this.dialog.open(ProjectFormDialogComponent, { data: {} });
@@ -35,7 +41,7 @@ export default class ProjectsPageComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('Dialog closed', result);
       if (result) {
-        this.loadProjects(); // Refresca la lista si se creó un proyecto
+        this.projectsResource.reload();
       }
     });
   }
@@ -44,7 +50,7 @@ export default class ProjectsPageComponent implements OnInit {
     const dialogRef = this.dialog.open(ProjectFormDialogComponent, { data: { project } });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.loadProjects(); // Refresca la lista si se editó un proyecto
+        this.projectsResource.reload();
       }
     });
   }

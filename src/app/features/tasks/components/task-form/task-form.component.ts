@@ -148,16 +148,18 @@ export class TaskFormComponent implements OnInit {
   onFormSubmit() {
     if (this.taskForm.invalid) {
       this.taskForm.markAllAsTouched();
+      // dont close the dialog if the form is invalid
       return;
     }
 
     if (this.data.mode === 'add') {
+      console.log('Creating task');
       const newTask: Task = {
         ...this.taskForm.value,
         fechaFin: this.taskForm.value.fechaFin.toISOString(),
         fechaInicio: new Date().toISOString(),
         idProyecto: this.data.projectId,
-        idUsuario: localStorage.getItem('userId'),
+        idUsuario: '073208B6-4D83-4211-AD52-57F2CE5ACAC0',
       };
       this.TasksService.createTask(newTask).subscribe((response) => {
         this.dialogRef.close(true);
