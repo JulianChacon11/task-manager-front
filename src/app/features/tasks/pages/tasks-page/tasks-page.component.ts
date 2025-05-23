@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TaskBoardComponent } from '../../components/task-board/task-board.component';
-import { Task } from '../../interfaces/task.interface';
 import { MatIconModule } from '@angular/material/icon';
 import { TaskFormComponent } from '../../components/task-form/task-form.component';
 import { MatDialog } from '@angular/material/dialog';

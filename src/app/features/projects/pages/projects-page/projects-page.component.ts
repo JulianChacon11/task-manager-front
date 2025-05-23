@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ProjectListComponent } from '../../components/project-list/project-list.component';
 import { Project } from '../../interfaces/project.interface';
 import { ProjectsService } from '../../services/projects.service';
@@ -14,26 +14,13 @@ import { rxResource } from '@angular/core/rxjs-interop';
 })
 export default class ProjectsPageComponent {
 
-  // projects = signal<Project[]>([]);
   projectService = inject(ProjectsService);
-  private dialog = inject(MatDialog);
+  private readonly dialog = inject(MatDialog);
 
   projectsResource = rxResource({
     request: () => ({}),
     loader: () => this.projectService.getProjects(),
   })
-
-  // ngOnInit(): void {
-  //   console.log('ProjectsPageComponent initialized');
-  //   this.loadProjects();
-  // }
-
-  // loadProjects() {
-  //   this.projectsService.getProjects().subscribe({
-  //     next: (projects) => this.projects.set(projects),
-  //     error: (err) => console.error('Error fetching projects:', err)
-  //   });
-  // }
 
   openNewProjectDialog() {
     const dialogRef = this.dialog.open(ProjectFormDialogComponent, { data: {} });

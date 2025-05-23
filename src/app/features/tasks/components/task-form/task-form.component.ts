@@ -27,11 +27,9 @@ import { MatFormField } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTimepickerModule } from '@angular/material/timepicker';
-import { Project } from '../../../projects/interfaces/project.interface';
 import { Task } from '../../interfaces/task.interface';
 import { MatIconModule } from '@angular/material/icon';
 import { FormUtils } from '../../../../utils/form.utils';
-import { ActivatedRoute, Router } from '@angular/router';
 import { TasksService } from '../../services/tasks.service';
 import { DeleteConfirmationDialogComponent } from '../../../../shared/components/delete-confirmation-dialog/delete-confirmation-dialog.component';
 
@@ -65,9 +63,9 @@ enum TaskStatus {
 export class TaskFormComponent implements OnInit {
   readonly dialogRef = inject(MatDialogRef<TaskFormComponent>);
   readonly dialog = inject(MatDialog);
-  private formBuilder = inject(FormBuilder);
-  private TasksService = inject(TasksService);
-  private router = inject(Router);
+  private readonly formBuilder = inject(FormBuilder);
+  private readonly TasksService = inject(TasksService);
+
   data: { task?: Task; mode: string; projectId?: string } =
     inject(MAT_DIALOG_DATA);
 
@@ -159,7 +157,7 @@ export class TaskFormComponent implements OnInit {
         fechaFin: this.taskForm.value.fechaFin.toISOString(),
         fechaInicio: new Date().toISOString(),
         idProyecto: this.data.projectId,
-        idUsuario: '073208B6-4D83-4211-AD52-57F2CE5ACAC0',
+        idUsuario: localStorage.getItem('userId'),
       };
       this.TasksService.createTask(newTask).subscribe((response) => {
         this.dialogRef.close(true);
